@@ -2,24 +2,22 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
-// Middleware to add user
-app.use((req, res, next) => {
-    console.log('User middleware called!');
-    req.user = "Guest";
-    next();
+app.get('/orders', (req, res) => {
+    res.send('Here is the list of all orders.');
 });
 
-// Middleware for /welcome route
-app.use('/welcome', (req, res, next) => {
-    console.log('Welcome route middleware');
-    next();
+app.post('/orders', (req, res) => {
+    res.send('A new order has been created.');
 });
 
-// Route handler
-app.get('/welcome', (req, res) => {
-    res.send(`<h1>Welcome, ${req.user}!</h1>`);
+app.get('/users', (req, res) => {
+    res.send('Here is the list of all users.');
+});
+
+app.post('/users', (req, res) => {
+    res.send('A new user has been added.');
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is up and running on port ${PORT} Ready to handle requests.`);
+    console.log(`Server is running on http://localhost:${PORT}`);
 });

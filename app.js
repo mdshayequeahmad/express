@@ -1,18 +1,11 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const orderRouter = require('./routes/orders');
+const userRouter = require('./routes/users');
 
-app.get('/', (req, res) => {
-    res.send('Hello from Home Page');
-});
+app.use('/orders', orderRouter);
+app.use('/users', userRouter);
 
-app.get('/contact/:userId', (req, res) => {
-    const id = req.params.userId;
-    const name = req.query.name;
-    const age = req.query.age;
-    res.send(`Hello from contact Page for user ${id} - ${name}, ${age}`);
-});
-
-app.listen(PORT, () => {
-    console.log(`Server is up and running on port ${PORT}.`);
+app.listen(3000, () => {
+    console.log(`Server is up and running on port 3000.`);
 });
